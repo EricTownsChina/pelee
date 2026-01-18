@@ -1,5 +1,7 @@
 package priv.eric.pelee.domain.vo;
 
+import priv.eric.pelee.domain.vo.field.FieldMapping;
+
 import java.util.List;
 
 /**

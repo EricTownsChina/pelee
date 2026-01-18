@@ -3,7 +3,7 @@ package priv.eric.pelee.domain.service.impl;
 import priv.eric.pelee.domain.entity.ConversationRecord;
 import priv.eric.pelee.domain.service.TransformerService;
 import priv.eric.pelee.domain.util.PathExtractor;
-import priv.eric.pelee.domain.vo.FieldMapping;
+import priv.eric.pelee.domain.vo.field.FieldMapping;
 import priv.eric.pelee.domain.vo.TransformationConfig;
 
 import java.util.*;

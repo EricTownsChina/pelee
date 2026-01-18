@@ -1,27 +1,8 @@
 {
-  "processors": [
-    {
-      "field": [
-        {
-          "rename": [
-            {"source": "user.id", "dest": "userId", "keep_original": false},
-            {"source": "message.content", "dest": "textContent", "keep_original": true},
-            {"source": "conversation_type", "dest": "convType", "keep_original": false}
-          ]
-        },
-        {
-          "extract": [
-            {"source": "user.profile.name", "dest": "userName", "default_value": "Anonymous", "keep_original": false},
-            {"source": "metadata.tags", "dest": "tags", "keep_original": true}
-          ]
-        },
-        {
-          "drop": [
-            {"source": "internal_data"},
-            {"source": "temp_field"}
-          ]
-        }
-      ]
-    }
-  ]
+  "processor": {
+    "field": [
+      {"type": "rename", "source": {"path": "xxx"}, "dest": {"path": "xx"}},
+      {"type": "rename", "source": {"path": "x"}, "dest": {"path": "xxxxx"}, "meta": {"keep_source": false}}
+    ]
+  }
 }

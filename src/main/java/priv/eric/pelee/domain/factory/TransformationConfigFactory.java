@@ -1,6 +1,6 @@
 package priv.eric.pelee.domain.factory;
 
-import priv.eric.pelee.domain.vo.FieldMapping;
+import priv.eric.pelee.domain.vo.field.FieldMapping;
 import priv.eric.pelee.domain.vo.TransformationConfig;
 
 import java.util.Arrays;

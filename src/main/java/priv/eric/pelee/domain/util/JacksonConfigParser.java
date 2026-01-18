@@ -1,16 +1,14 @@
 package priv.eric.pelee.domain.util;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import priv.eric.pelee.domain.vo.FieldMapping;
+import priv.eric.pelee.domain.vo.field.FieldMapping;
 import priv.eric.pelee.domain.vo.TransformationConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 使用Jackson的配置解析器

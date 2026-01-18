@@ -3,7 +3,7 @@ package priv.eric.pelee.domain.example;
 import priv.eric.pelee.domain.entity.ConversationRecord;
 import priv.eric.pelee.domain.factory.TransformationConfigFactory;
 import priv.eric.pelee.domain.service.impl.DomainTransformationOrchestrator;
-import priv.eric.pelee.domain.vo.FieldMapping;
+import priv.eric.pelee.domain.vo.field.FieldMapping;
 
 import java.util.Arrays;
 import java.util.HashMap;

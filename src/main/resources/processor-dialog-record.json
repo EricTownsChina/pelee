@@ -1,0 +1,26 @@
+{
+  "code": "processor-dialog-record",
+  "fields": [
+    {
+      "type": "rename",
+      "source": {
+        "path": "xxx"
+      },
+      "dest": {
+        "path": "xx"
+      }
+    },
+    {
+      "type": "rename",
+      "source": {
+        "path": "x"
+      },
+      "dest": {
+        "path": "xxxxx"
+      },
+      "meta": {
+        "keep_source": false
+      }
+    }
+  ]
+}

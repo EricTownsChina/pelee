@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: pelee
+
+processor:
+  dialog-record:
+    enable: true
+    path: "D:/projects/study/java/pelee/src/main/resources/processor-dialog-record.json"

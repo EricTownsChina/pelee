@@ -1,26 +1,7 @@
 {
-  "code": "processor-dialog-record",
+  "id": "processor-dialog-record",
   "fields": [
-    {
-      "type": "rename",
-      "source": {
-        "path": "xxx"
-      },
-      "dest": {
-        "path": "xx"
-      }
-    },
-    {
-      "type": "rename",
-      "source": {
-        "path": "x"
-      },
-      "dest": {
-        "path": "xxxxx"
-      },
-      "meta": {
-        "keep_source": false
-      }
-    }
+    {"type": "rename", "path": "/", "source": "agent_id", "dest": "user_agent_id", "addition": {"default_value": "123456"}},
+    {"type": "rename", "source": "start_time", "dest": "ask_time"}
   ]
 }

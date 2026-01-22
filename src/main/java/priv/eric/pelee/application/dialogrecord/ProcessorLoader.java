@@ -5,14 +5,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import priv.eric.pelee.domain.dialogrecord.model.FieldProcessor;
 import priv.eric.pelee.domain.dialogrecord.model.Processor;
+import priv.eric.pelee.infrastructure.factory.dialogrecord.FieldProcessorFactory;
+import priv.eric.pelee.infrastructure.factory.dialogrecord.FieldProcessorFactoryRegistry;
 import priv.eric.pelee.infrastructure.pojo.dialogrecord.ProcessorPO;
 import priv.eric.pelee.infrastructure.repository.FileDataRepository;
+import priv.eric.pelee.infrastructure.util.JsonUtil;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Description: todo
@@ -27,29 +31,37 @@ public class ProcessorLoader implements Processor {
 
     private final FileDataRepository fileDataRepository;
     private final ProcessorProperties processorProperties;
+    private final FieldProcessorFactoryRegistry registry;
+    private final List<FieldProcessorFactory> fieldProcessFactories;
+
+    private ProcessorPO processorPO;
+    private List<FieldProcessor> fieldProcessors;
 
     public ProcessorLoader(FileDataRepository fileDataRepository,
-                           ProcessorProperties processorProperties) {
+                           ProcessorProperties processorProperties,
+                           FieldProcessorFactoryRegistry registry,
+                           List<FieldProcessorFactory> fieldProcessFactories) {
         this.fileDataRepository = fileDataRepository;
         this.processorProperties = processorProperties;
+        this.registry = registry;
+        this.fieldProcessFactories = fieldProcessFactories;
+        this.processorPO = ProcessorPO.empty();
     }
 
 
     @PostConstruct
-    public ProcessorPO load() throws IOException {
+    public void load() throws IOException {
+        fieldProcessFactories.forEach(registry::register);
         if (processorProperties.enable()) {
-            final String path = processorProperties.getPath();
-            final Path filePath = Paths.get(path);
-            ProcessorPO processorPO = fileDataRepository.loadJsonFile(filePath, ProcessorPO.class);
-
-            LOGGER.info(".");
+            final Path filePath = Paths.get(processorProperties.getPath());
+            this.processorPO = fileDataRepository.loadJsonFile(filePath, ProcessorPO.class);
+            this.fieldProcessors = this.processorPO.getFields().stream().map(registry::create).collect(Collectors.toList());
         }
-        return ProcessorPO.empty();
     }
 
     @Override
     public List<FieldProcessor> getFieldProcessors() {
-        return null;
+        return this.fieldProcessors;
     }
 
 }

@@ -35,7 +35,7 @@ public class RenameFieldProcessor extends FieldProcessor {
     }
 
     @Override
-    void process(JsonNode dialogRecord) {
+    public void process(JsonNode dialogRecord) {
         if (Objects.equals(source, dest)) {
             return;
         }

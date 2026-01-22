@@ -18,8 +18,8 @@ public abstract class DefaultFieldProcessorFactory implements FieldProcessorFact
     @Override
     public abstract FieldProcessType type();
 
-    @Override
-    public abstract FieldProcessor create(FieldProcessPO fieldProcessPO);
+
+    public abstract FieldProcessor doCreate(FieldProcessPO fieldProcessPO);
 
     abstract boolean validate(FieldProcessPO fieldProcessPO);
 
@@ -29,6 +29,14 @@ public abstract class DefaultFieldProcessorFactory implements FieldProcessorFact
 
     void post(FieldProcessPO fieldProcessPO, FieldProcessor fieldProcessor) {
         //
+    }
+
+    @Override
+    public FieldProcessor create(FieldProcessPO fieldProcessPO) {
+        pre(fieldProcessPO);
+        FieldProcessor fieldProcessor = doCreate(fieldProcessPO);
+        post(fieldProcessPO, fieldProcessor);
+        return fieldProcessor;
     }
 
     public void register(FieldProcessorFactoryRegistry registry) {

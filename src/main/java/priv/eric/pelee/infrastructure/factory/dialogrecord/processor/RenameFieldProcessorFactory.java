@@ -1,10 +1,10 @@
 package priv.eric.pelee.infrastructure.factory.dialogrecord.processor;
 
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import priv.eric.pelee.domain.dialogrecord.model.FieldProcessType;
 import priv.eric.pelee.domain.dialogrecord.model.FieldProcessor;
 import priv.eric.pelee.domain.dialogrecord.model.RenameFieldProcessor;
-import priv.eric.pelee.infrastructure.factory.dialogrecord.FieldProcessorFactoryRegistry;
 import priv.eric.pelee.infrastructure.pojo.dialogrecord.FieldProcessPO;
 
 /**
@@ -13,13 +13,10 @@ import priv.eric.pelee.infrastructure.pojo.dialogrecord.FieldProcessPO;
  * @author EricTowns
  * @date 2026/1/22 14:53
  */
+@Component
 public class RenameFieldProcessorFactory extends DefaultFieldProcessorFactory {
 
     private static final String ROOT_PATH = "/";
-
-    public RenameFieldProcessorFactory(FieldProcessorFactoryRegistry registry) {
-        super(registry);
-    }
 
     @Override
     public FieldProcessType type() {
@@ -27,7 +24,7 @@ public class RenameFieldProcessorFactory extends DefaultFieldProcessorFactory {
     }
 
     @Override
-    public FieldProcessor create(FieldProcessPO fieldProcessPO) {
+    public FieldProcessor doCreate(FieldProcessPO fieldProcessPO) {
         String path = fieldProcessPO.getPath();
         String source = fieldProcessPO.getSource();
         String dest = fieldProcessPO.getDest();

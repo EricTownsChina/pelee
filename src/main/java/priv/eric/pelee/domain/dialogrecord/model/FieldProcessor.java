@@ -20,6 +20,6 @@ public abstract class FieldProcessor {
 
     abstract FieldProcessType type();
 
-    abstract void process(JsonNode dialogRecord);
+    public abstract void process(JsonNode dialogRecord);
 
 }

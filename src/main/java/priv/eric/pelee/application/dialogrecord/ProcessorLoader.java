@@ -3,13 +3,12 @@ package priv.eric.pelee.application.dialogrecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import priv.eric.pelee.domain.dialogrecord.model.FieldProcessor;
+import priv.eric.pelee.domain.dialogrecord.model.fieldprocessor.FieldProcessor;
 import priv.eric.pelee.domain.dialogrecord.model.Processor;
 import priv.eric.pelee.infrastructure.factory.dialogrecord.FieldProcessorFactory;
 import priv.eric.pelee.infrastructure.factory.dialogrecord.FieldProcessorFactoryRegistry;
 import priv.eric.pelee.infrastructure.pojo.dialogrecord.ProcessorPO;
 import priv.eric.pelee.infrastructure.repository.FileDataRepository;
-import priv.eric.pelee.infrastructure.util.JsonUtil;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;

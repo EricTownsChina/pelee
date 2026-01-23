@@ -1,5 +1,7 @@
 package priv.eric.pelee.domain.dialogrecord.model;
 
+import priv.eric.pelee.domain.dialogrecord.model.fieldprocessor.FieldProcessor;
+
 import java.util.List;
 
 /**

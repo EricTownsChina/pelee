@@ -1,7 +1,7 @@
 package priv.eric.pelee.infrastructure.factory.dialogrecord;
 
 import priv.eric.pelee.domain.dialogrecord.model.FieldProcessType;
-import priv.eric.pelee.domain.dialogrecord.model.FieldProcessor;
+import priv.eric.pelee.domain.dialogrecord.model.fieldprocessor.FieldProcessor;
 import priv.eric.pelee.infrastructure.pojo.dialogrecord.FieldProcessPO;
 
 /**

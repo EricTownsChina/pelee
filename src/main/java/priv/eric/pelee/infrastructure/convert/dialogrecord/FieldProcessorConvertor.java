@@ -1,6 +1,6 @@
 package priv.eric.pelee.infrastructure.convert.dialogrecord;
 
-import priv.eric.pelee.domain.dialogrecord.model.FieldProcessor;
+import priv.eric.pelee.domain.dialogrecord.model.fieldprocessor.FieldProcessor;
 import priv.eric.pelee.infrastructure.pojo.dialogrecord.FieldProcessPO;
 
 /**

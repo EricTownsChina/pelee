@@ -1,9 +1,12 @@
-package priv.eric.pelee.domain.dialogrecord.model;
+package priv.eric.pelee.domain.dialogrecord.model.fieldprocessor;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import priv.eric.pelee.domain.dialogrecord.model.FieldProcessType;
+import priv.eric.pelee.domain.dialogrecord.model.spi.FieldProcessConfig;
+import priv.eric.pelee.domain.dialogrecord.model.spi.FieldProcessorSPI;
 
 import java.util.Objects;
 
@@ -15,18 +18,23 @@ import java.util.Objects;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class RenameFieldProcessor extends FieldProcessor {
+public class RenameFieldProcessor extends FieldProcessor implements FieldProcessorSPI {
 
-    private final String path;
+    private String path;
 
-    private final String source;
+    private String source;
 
-    private final String dest;
+    private String dest;
 
     public RenameFieldProcessor(String path, String source, String dest) {
         this.path = path;
         this.source = source;
         this.dest = dest;
+    }
+
+    @Override
+    public FieldProcessType getType() {
+        return FieldProcessType.RENAME;
     }
 
     @Override
@@ -51,6 +59,14 @@ public class RenameFieldProcessor extends FieldProcessor {
         }
         pathObjNode.set(dest, sourceNode);
         pathObjNode.remove(source);
+    }
+
+    @Override
+    public void process(JsonNode dialogRecord, FieldProcessConfig config) {
+        this.path = config.getPath();
+        this.source = config.getSource();
+        this.dest = config.getDest();
+        process(dialogRecord);
     }
 
 }

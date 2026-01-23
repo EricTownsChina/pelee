@@ -15,9 +15,9 @@ public enum FieldProcessType {
      */
     RENAME,
     /**
-     * 字段值提取到新字段
+     * 字段值移动
      */
-    EXTRACT,
+    MOVE,
     /**
      * 删除字段
      */

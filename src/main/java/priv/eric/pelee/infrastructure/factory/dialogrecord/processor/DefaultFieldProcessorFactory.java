@@ -1,8 +1,7 @@
 package priv.eric.pelee.infrastructure.factory.dialogrecord.processor;
 
-import org.springframework.stereotype.Component;
 import priv.eric.pelee.domain.dialogrecord.model.FieldProcessType;
-import priv.eric.pelee.domain.dialogrecord.model.FieldProcessor;
+import priv.eric.pelee.domain.dialogrecord.model.fieldprocessor.FieldProcessor;
 import priv.eric.pelee.infrastructure.factory.dialogrecord.FieldProcessorFactoryRegistry;
 import priv.eric.pelee.infrastructure.factory.dialogrecord.FieldProcessorFactory;
 import priv.eric.pelee.infrastructure.pojo.dialogrecord.FieldProcessPO;

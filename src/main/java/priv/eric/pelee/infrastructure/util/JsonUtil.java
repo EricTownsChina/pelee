@@ -1,10 +1,10 @@
 package priv.eric.pelee.infrastructure.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.Optional;
 
@@ -82,24 +82,34 @@ public class JsonUtil {
     }
 
     /**
+     * 将JsonNode转换为对象
+     *
+     * @param node JsonNode
+     * @return T 转换对象
+     */
+    public static <T> T convertValue(JsonNode node, Class<T> clazz) {
+        return OBJECT_MAPPER.convertValue(node, clazz);
+    }
+
+    /**
      * 从JSON字符串中根据路径提取值
      *
-     * @param json  JSON字符串
-     * @param path  路径表达式，如 "user.name" 或 "items[0].id"
+     * @param json JSON字符串
+     * @param path 路径表达式，如 "user.name" 或 "items[0].id"
      * @return 提取的值，如果路径不存在则返回Optional.empty()
      */
     public static Optional<String> extractValueByPath(String json, String path) {
         try {
             JsonNode rootNode = parseToJsonNode(json);
             JsonNode node = getByPath(rootNode, path);
-            
+
             if (node != null && !node.isMissingNode()) {
                 return Optional.of(node.asText());
             }
         } catch (Exception e) {
             // 如果解析失败或路径不存在，返回空Optional
         }
-        
+
         return Optional.empty();
     }
 
@@ -113,14 +123,14 @@ public class JsonUtil {
     public static Optional<String> extractValueByPath(JsonNode node, String path) {
         try {
             JsonNode resultNode = getByPath(node, path);
-            
+
             if (resultNode != null && !resultNode.isMissingNode()) {
                 return Optional.of(resultNode.asText());
             }
         } catch (Exception e) {
             // 如果解析失败或路径不存在，返回空Optional
         }
-        
+
         return Optional.empty();
     }
 
@@ -135,7 +145,7 @@ public class JsonUtil {
         if (node == null || path == null || path.trim().isEmpty()) {
             return null;
         }
-        
+
         try {
             // 使用Jackson的at方法，支持JSON Pointer语法 (例如 /user/name 或 /items/0/id)
             // 但我们需要将点分隔的路径转换为JSON Pointer语法
@@ -146,7 +156,7 @@ public class JsonUtil {
             return null;
         }
     }
-    
+
     /**
      * 将点分隔和数组索引路径转换为JSON指针语法
      * 例如: "user.name" -> "/user/name", "items[0].id" -> "/items/0/id"
@@ -158,13 +168,13 @@ public class JsonUtil {
         if (path == null || path.isEmpty()) {
             return "/";
         }
-        
+
         // 先处理数组索引: items[0].property -> items/0/property
         String converted = path.replaceAll("\\[(\\d+)\\]", "/$1");
-        
+
         // 再将点替换为斜杠
         converted = "/" + converted.replace('.', '/');
-        
+
         return converted;
     }
 

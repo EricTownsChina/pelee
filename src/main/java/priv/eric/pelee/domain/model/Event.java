@@ -6,12 +6,20 @@ package priv.eric.pelee.domain.model;
  * @author EricTowns
  * @date 2026/1/26 21:01
  */
-public class Event<T> {
+public class Event {
 
-    private T data;
+    public Object data;
 
-    public T get() {
+    public Event(Object data) {
+        this.data = data;
+    }
+
+    public Object get() {
         return this.data;
+    }
+
+    public void set(Object data) {
+        this.data = data;
     }
 
 }

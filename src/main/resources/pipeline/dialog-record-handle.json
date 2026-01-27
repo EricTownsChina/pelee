@@ -1,0 +1,22 @@
+{
+  "id": "dialog-record-handle",
+  "context": "sequence",
+  "event": "",
+  "processors": [
+    {
+      "type": "rename",
+      "mappings": {
+        "/user/id": "user_id",
+        "userId": "user_id",
+        "sessionId": "session_id"
+      }
+    },
+    {
+      "type": "remove",
+      "fields": [
+        "/param/event_list",
+        "ori_message"
+      ]
+    }
+  ]
+}

@@ -13,19 +13,19 @@ import java.util.Map;
  * @author EricTowns
  * @date 2026/1/26 21:14
  */
-public class StageFactory<T> {
+public class StageFactory {
 
-    private final Map<String, StageDescriptor<T>> registry = new HashMap<>();
+    private final Map<String, StageDescriptor> registry = new HashMap<>();
 
-    public StageFactory(List<StageDescriptor<T>> descriptors) {
-        for (StageDescriptor<T> descriptor : descriptors) {
+    public StageFactory(List<StageDescriptor> descriptors) {
+        for (StageDescriptor descriptor : descriptors) {
             registry.put(descriptor.type(), descriptor);
         }
     }
 
-    public Stage<T> create(JsonNode stageNode) {
+    public Stage create(JsonNode stageNode) {
         String type = stageNode.get("type").asText();
-        StageDescriptor<T> descriptor = registry.get(type);
+        StageDescriptor descriptor = registry.get(type);
         if (descriptor == null) {
             throw new IllegalArgumentException("Invalid stage type: " + type);
         }

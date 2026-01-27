@@ -6,7 +6,7 @@ package priv.eric.pelee.domain.model;
  * @author EricTowns
  * @date 2026/1/26 21:08
  */
-public interface StageDescriptor<T> {
+public interface StageDescriptor {
 
     String type();
 
@@ -14,6 +14,6 @@ public interface StageDescriptor<T> {
 
     Class<?> configClass();
 
-    Stage<T> create(Object config);
+    Stage create(Object config);
 
 }

@@ -6,8 +6,10 @@ package priv.eric.pelee.domain.model;
  * @author EricTowns
  * @date 2026/1/26 21:03
  */
-public interface StageContext<T> {
+public interface StageContext {
 
-    void next(Event<T> event);
+    String code();
+
+    void next(Event event);
 
 }

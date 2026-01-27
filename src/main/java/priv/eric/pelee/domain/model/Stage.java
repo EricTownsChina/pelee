@@ -6,8 +6,8 @@ package priv.eric.pelee.domain.model;
  * @author EricTowns
  * @date 2026/1/26 20:59
  */
-public interface Stage<T> {
+public interface Stage {
 
-    void process(Event<T> event, StageContext<T> context);
+    void process(Event event, StageContext context);
 
 }

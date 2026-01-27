@@ -1,9 +1,0 @@
-{
-  "id": "processor-dialog-record",
-  "fields": [
-    {"type": "rename", "path": "/", "source": "xxx", "dest": "user_id", "addition": {"default_value": "123456"}},
-    {"type": "rename", "path": "/", "source": "start_time", "dest": "ask_time"},
-    {"type": "move", "path": "/", "source": "user_id", "dest": "userId", "addition": {"keep_source": false}},
-    {"type": "drop", "path": "/", "source": "temp_field", "dest": null}
-  ]
-}

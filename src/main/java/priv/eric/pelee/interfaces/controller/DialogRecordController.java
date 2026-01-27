@@ -1,16 +1,15 @@
 package priv.eric.pelee.interfaces.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import priv.eric.pelee.domain.dialogrecord.service.ProcessService;
-import priv.eric.pelee.infrastructure.util.JsonUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import priv.eric.pelee.application.service.PipelineExecutionService;
 import priv.eric.pelee.interfaces.entity.Resp;
 
+import java.util.Map;
+
 /**
- * Description: todo
+ * Description: 对话记录处理控制器
  *
  * @author EricTowns
  * @date 2026/1/22 20:27
@@ -19,17 +18,47 @@ import priv.eric.pelee.interfaces.entity.Resp;
 @RequestMapping("/dialog_record")
 public class DialogRecordController {
 
-    private final ProcessService processService;
+    @Autowired
+    private PipelineExecutionService pipelineExecutionService;
 
-    public DialogRecordController(ProcessService processService) {
-        this.processService = processService;
+    @PostMapping("/handle")
+    public Resp<String> process(@RequestBody Object dialogRecord) {
+        // 原有的简单处理逻辑
+        return Resp.ok("Simple processing completed");
     }
 
-    @PostMapping("/process")
-    public Resp<String> process(@RequestBody Object dialogRecord) {
-        JsonNode node = JsonUtil.parseToJsonNode(JsonUtil.toJson(dialogRecord));
-        processService.process(node);
-        return Resp.ok(JsonUtil.toJson(node));
+    @PostMapping("/process-by-pipeline-id")
+    public Resp<Object> processWithPipeline(
+            @RequestParam String pipelineId,
+            @RequestBody Object dialogRecord) {
+        try {
+            if (!pipelineExecutionService.isPipelineExists(pipelineId)) {
+                return Resp.error("Pipeline not found: " + pipelineId);
+            }
+            
+            JsonNode inputData = priv.eric.pelee.infrastructure.util.JsonUtil.parseToJsonNode(
+                priv.eric.pelee.infrastructure.util.JsonUtil.toJson(dialogRecord)
+            );
+            
+            Object result = pipelineExecutionService.executePipeline(pipelineId, inputData);
+            
+            return Resp.ok(priv.eric.pelee.infrastructure.util.JsonUtil.toJson(result));
+        } catch (Exception e) {
+            return Resp.error("Pipeline execution failed: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/available-pipelines")
+    public Resp<Map<String, Object>> getAvailablePipelines() {
+        try {
+            Map<String, ?> allPipelines = pipelineExecutionService.getAllPipelines();
+            Map<String, Object> response = new java.util.HashMap<>();
+            response.put("pipelines", allPipelines.keySet());
+            response.put("count", allPipelines.size());
+            return Resp.ok(response);
+        } catch (Exception e) {
+            return Resp.error("Failed to get available pipelines: " + e.getMessage());
+        }
     }
 
 }

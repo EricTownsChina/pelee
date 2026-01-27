@@ -11,16 +11,16 @@ import java.util.List;
  * @author EricTowns
  * @date 2026/1/27 00:19
  */
-public class PipelineLoader<T> {
+public class PipelineLoader {
 
-    private final StageFactory<T> stageFactory;
+    private final StageFactory stageFactory;
 
-    public PipelineLoader(StageFactory<T> stageFactory) {
+    public PipelineLoader(StageFactory stageFactory) {
         this.stageFactory = stageFactory;
     }
 
-    public List<Stage<T>> load(JsonNode root) {
-        List<Stage<T>> stages = new ArrayList<>();
+    public List<Stage> load(JsonNode root) {
+        List<Stage> stages = new ArrayList<>();
         for (JsonNode node : root.get("_processors")) {
             stages.add(stageFactory.create(node));
         }

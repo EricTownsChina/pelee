@@ -13,7 +13,7 @@ import priv.eric.pelee.domain.model.StageDescriptor;
 public class RenameStageDescriptor implements StageDescriptor {
 
     @Override
-    public String type() {
+    public String code() {
         return "rename";
     }
 

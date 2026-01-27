@@ -1,8 +1,7 @@
-package priv.eric.pelee.application.init;
+package priv.eric.pelee.application.factory;
 
 import priv.eric.pelee.domain.model.StageContext;
 
-import java.util.Collection;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
@@ -13,27 +12,27 @@ import java.util.Map;
  * @author EricTowns
  * @date 2026/1/27 14:14
  */
-public class StageContextLoader {
+public class StageContextFactory {
 
-    private static volatile StageContextLoader instance;
+    private static volatile StageContextFactory instance;
     private final Map<String, StageContext> stageContexts;
 
-    private StageContextLoader() {
-        this.stageContexts = loadAllStageContexts();
+    private StageContextFactory() {
+        this.stageContexts = load();
     }
 
-    public static StageContextLoader getInstance() {
+    public static StageContextFactory getInstance() {
         if (instance == null) {
-            synchronized (StageContextLoader.class) {
+            synchronized (StageContextFactory.class) {
                 if (instance == null) {
-                    instance = new StageContextLoader();
+                    instance = new StageContextFactory();
                 }
             }
         }
         return instance;
     }
 
-    private Map<String, StageContext> loadAllStageContexts() {
+    private Map<String, StageContext> load() {
         ServiceLoader<StageContext> loader = ServiceLoader.load(StageContext.class);
         Map<String, StageContext> contexts = new ConcurrentHashMap<>();
         for (StageContext context : loader) {
@@ -42,11 +41,7 @@ public class StageContextLoader {
         return contexts;
     }
 
-    public Collection<StageContext> getAllStageContexts() {
-        return stageContexts.values();
-    }
-
-    public StageContext getStageContextByCode(String code) {
+    public StageContext get(String code) {
         return stageContexts.get(code);
     }
 

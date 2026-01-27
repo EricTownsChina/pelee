@@ -12,7 +12,7 @@ import priv.eric.pelee.domain.model.StageDescriptor;
  */
 public class RemoveStageDescriptor implements StageDescriptor {
     @Override
-    public String type() {
+    public String code() {
         return "remove";
     }
 

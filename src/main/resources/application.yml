@@ -5,6 +5,8 @@ spring:
   application:
     name: pelee
 
-pipeline:
-  base-dir: "D:/projects/study/java/pelee/src/main/resources/pipeline"
+processor:
+  dialog-record:
+    enable: true
+    path: "D:/projects/study/java/pelee/src/main/resources/processor-dialog-record.json"
 

@@ -1,10 +1,10 @@
 {
-  "enable": true,
   "id": "dialog-record-handle",
   "context": "sequence",
+  "event": "",
   "processors": [
     {
-      "code": "rename",
+      "type": "rename",
       "mappings": {
         "/user/id": "user_id",
         "userId": "user_id",
@@ -12,7 +12,7 @@
       }
     },
     {
-      "code": "remove",
+      "type": "remove",
       "fields": [
         "/param/event_list",
         "ori_message"

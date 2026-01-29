@@ -8,7 +8,7 @@ package priv.eric.pelee.domain.model;
  */
 public interface StageDescriptor {
 
-    String code();
+    String type();
 
     String desc();
 

@@ -32,7 +32,7 @@ public class DialogRecordController {
             @RequestParam String pipelineId,
             @RequestBody Object dialogRecord) {
         try {
-            if (!pipelineExecutionService.exists(pipelineId)) {
+            if (!pipelineExecutionService.isPipelineExists(pipelineId)) {
                 return Resp.error("Pipeline not found: " + pipelineId);
             }
             
@@ -45,6 +45,19 @@ public class DialogRecordController {
             return Resp.ok(priv.eric.pelee.infrastructure.util.JsonUtil.toJson(result));
         } catch (Exception e) {
             return Resp.error("Pipeline execution failed: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/available-pipelines")
+    public Resp<Map<String, Object>> getAvailablePipelines() {
+        try {
+            Map<String, ?> allPipelines = pipelineExecutionService.getAllPipelines();
+            Map<String, Object> response = new java.util.HashMap<>();
+            response.put("pipelines", allPipelines.keySet());
+            response.put("count", allPipelines.size());
+            return Resp.ok(response);
+        } catch (Exception e) {
+            return Resp.error("Failed to get available pipelines: " + e.getMessage());
         }
     }
 

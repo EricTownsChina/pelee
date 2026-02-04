@@ -23,7 +23,7 @@ public class RenameStage implements Stage {
     }
 
     @Override
-    public void process(Event event, StageContext context) {
+    public void process(Event<?> event, StageContext context) {
         if (event.get() != null) {
             ObjectNode objectNode = (ObjectNode) event.get();
             // 遍历映射关系，重命名字段

@@ -8,6 +8,6 @@ package priv.eric.pelee.domain.model;
  */
 public interface Stage {
 
-    void process(Event event, StageContext context);
+    void process(Event<?> event, StageContext context);
 
 }

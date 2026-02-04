@@ -1,6 +1,8 @@
-package priv.eric.pelee.domain.model;
+package priv.eric.pelee.application.factory;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import priv.eric.pelee.domain.model.Stage;
+import priv.eric.pelee.domain.model.StageDescriptor;
 import priv.eric.pelee.infrastructure.util.JsonUtil;
 
 import java.util.HashMap;
@@ -8,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Description: Stage工厂
+ * Description: 阶段工厂，负责根据配置创建Stage实例
  *
  * @author EricTowns
  * @date 2026/1/26 21:14

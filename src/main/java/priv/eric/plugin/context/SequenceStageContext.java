@@ -31,7 +31,7 @@ public class SequenceStageContext implements StageContext {
     }
 
     @Override
-    public void next(Event event) {
+    public void next(Event<?> event) {
         if (stages != null && index < stages.size()) {
             stages.get(index++).process(event, this);
         }

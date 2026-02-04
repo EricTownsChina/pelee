@@ -23,7 +23,7 @@ public class RemoveStage implements Stage {
     }
 
     @Override
-    public void process(Event event, StageContext context) {
+    public void process(Event<?> event, StageContext context) {
         if (event.get() != null) {
             ObjectNode objectNode = (ObjectNode) event.get();
             for (String field : fields) {

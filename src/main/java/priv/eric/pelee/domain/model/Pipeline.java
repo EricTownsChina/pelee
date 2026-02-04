@@ -21,10 +21,12 @@ public class Pipeline {
         this.context = context;
     }
 
-    public void execute(Event event) {
-        // 设置上下文中的阶段列表（如果上下文支持）
-        if (context instanceof priv.eric.plugin.context.SequenceStageContext) {
-            ((priv.eric.plugin.context.SequenceStageContext) context).setStages(stages);
+public void execute(Event<?> event) {
+        // 尝试设置上下文中的阶段列表
+        try {
+            context.setStages(stages);
+        } catch (UnsupportedOperationException e) {
+            // 上下文不支持设置阶段列表，忽略
         }
         context.next(event);
     }

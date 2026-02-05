@@ -36,6 +36,20 @@ public class JsonUtil {
     }
 
     /**
+     * 将对象转换为格式化（美观）的JSON字符串
+     *
+     * @param obj 待转换的对象
+     * @return 格式化后的JSON字符串
+     */
+    public static String toPrettyJson(Object obj) {
+        try {
+            return OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Object to pretty JSON conversion failed", e);
+        }
+    }
+
+    /**
      * 将JSON字符串转换为指定类型的对象
      *
      * @param json  JSON字符串

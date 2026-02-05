@@ -1,9 +1,22 @@
 {
-  "id": "dialog-record-handle",
-  "context": "sequence",
-  "event": "",
-  "processors": [
+  "input": {
+    "type": "kafka",
+    "properties": {
+      "bootstrap-servers": "",
+      "username": "",
+      "password": ""
+    }
+  },
+  "output": [
     {
+      "type": "http",
+      "name": "",
+      "url": ""
+    }
+  ],
+  "filter": [
+    {
+      "name": "重命名基础字段",
       "type": "rename",
       "mappings": {
         "/user/id": "user_id",

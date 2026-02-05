@@ -1,7 +1,9 @@
 package priv.eric.pelee.application.registry;
 
 import org.springframework.stereotype.Component;
-import priv.eric.pelee.domain.model.Filter;
+import priv.eric.pelee.domain.model.filter.PipeFilter;
+import priv.eric.pelee.plugin.processor.remove.RemoveFieldPipeFilter;
+import priv.eric.pelee.plugin.processor.rename.RenameFieldPipeFilter;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +31,7 @@ public class FilterRegistry {
     /**
      * 创建过滤器实例
      */
-    public Filter createFilter(String type, Object config) {
+    public PipeFilter createFilter(String type, Object config) {
         FilterFactory factory = filterFactories.get(type);
         if (factory == null) {
             throw new IllegalArgumentException("Unknown filter type: " + type);
@@ -56,7 +58,7 @@ public class FilterRegistry {
      */
     @FunctionalInterface
     public interface FilterFactory {
-        Filter create(Object config);
+        PipeFilter create(Object config);
     }
 
     /**
@@ -65,20 +67,16 @@ public class FilterRegistry {
     public void initializeDefaultFilters() {
         // 注册重命名字段过滤器
         registerFilter("rename", config -> {
-            if (config instanceof priv.eric.plugin.filter.rename.RenameFieldFilter.RenameFieldConfig) {
-                return new priv.eric.plugin.filter.rename.RenameFieldFilter(
-                    (priv.eric.plugin.filter.rename.RenameFieldFilter.RenameFieldConfig) config
-                );
+            if (config instanceof RenameFieldPipeFilter.RenameFieldConfig renameConfig) {
+                return new RenameFieldPipeFilter(renameConfig);
             }
             throw new IllegalArgumentException("Invalid config for rename filter");
         });
 
         // 注册删除字段过滤器
         registerFilter("remove", config -> {
-            if (config instanceof priv.eric.plugin.filter.remove.RemoveFieldFilter.RemoveFieldConfig) {
-                return new priv.eric.plugin.filter.remove.RemoveFieldFilter(
-                    (priv.eric.plugin.filter.remove.RemoveFieldFilter.RemoveFieldConfig) config
-                );
+            if (config instanceof RemoveFieldPipeFilter.RemoveFieldConfig removeConfig) {
+                return new RemoveFieldPipeFilter(removeConfig);
             }
             throw new IllegalArgumentException("Invalid config for remove filter");
         });

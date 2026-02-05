@@ -90,30 +90,29 @@ priv.eric.pelee/
 ```
 
 ### Import Organization
+
 ```java
 // Standard library imports first
-import java.util.*;
-import java.util.concurrent.*;
 
 // Third-party imports (Jackson, Spring, etc.)
 import com.fasterxml.jackson.databind.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
+        import org.springframework.beans.factory.annotation.*;
+        import org.springframework.stereotype.*;
+        import org.springframework.web.bind.annotation.*;
 
 // Domain imports
-import priv.eric.pelee.domain.model.*;
-import priv.eric.pelee.domain.service.*;
+        import priv.eric.pelee.domain.model.*;
+        import priv.eric.pelee.domain.service.*;
 
 // Application imports
-import priv.eric.pelee.application.service.*;
-import priv.eric.pelee.application.registry.*;
+        import priv.eric.pelee.application.service.*;
+        import priv.eric.pelee.application.registry.*;
 
 // Infrastructure imports
-import priv.eric.pelee.infrastructure.util.*;
+        import priv.eric.pelee.infrastructure.util.*;
 
 // Plugin imports
-import priv.eric.plugin.stage.rename.*;
+        import priv.eric.pelee.plugin.stage.rename.*;
 ```
 
 ### Naming Conventions
@@ -303,7 +302,7 @@ public class CustomConfig {
 #### Plugin Registration
 - Create `META-INF/services/priv.eric.pelee.domain.model.StageFactory` file
 - Implement `StageFactory` interface
-- Follow existing plugin patterns in `priv.eric.plugin.*`
+- Follow existing plugin patterns in `priv.eric.pelee.plugin.*`
 
 ### JSON Processing
 

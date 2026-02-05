@@ -1,4 +1,4 @@
-package priv.eric.plugin.context;
+package priv.eric.pelee.plugin.context;
 
 import priv.eric.pelee.domain.model.Event;
 import priv.eric.pelee.domain.model.Stage;

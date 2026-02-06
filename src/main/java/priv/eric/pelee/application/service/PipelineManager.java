@@ -1,21 +1,17 @@
 package priv.eric.pelee.application.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import priv.eric.pelee.application.factory.ProcessorFactory;
 import priv.eric.pelee.domain.model.Pipeline;
-import priv.eric.pelee.domain.model.Processor;
+import priv.eric.pelee.infrastructure.util.JsonUtil;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -43,20 +39,18 @@ public class PipelineManager {
             paths.filter(p -> {
                 String pathName = p.getFileName().toString();
                 return pathName.endsWith(".json");
-            })
+            }).toList();
         }
     }
 
+    public JsonNode readConfig(Path path) throws IOException {
+        String config = Files.readString(path);
+        JsonNode node = JsonUtil.convertValue(config, JsonNode.class);
 
-    public Pipeline create(ArrayNode node) {
-        List<Processor<?>> processors = new ArrayList<>(node.size());
-        for (JsonNode jsonNode : node) {
-            if (jsonNode instanceof ObjectNode configNode) {
-                Processor<?> processor = processorFactory.create(configNode);
-                processors.add(processor);
-            }
-        }
-        return new Pipeline(processors);
     }
+
+
+
+
 
 }

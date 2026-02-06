@@ -8,5 +8,5 @@ spring:
 processor:
   dialog-record:
     enable: true
-    path: "D:/projects/study/java/pelee/src/main/resources/processor-dialog-record.json"
+    path: "E:/my projects/pelee/src/main/resources/pipeline"
 

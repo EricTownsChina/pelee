@@ -18,7 +18,7 @@ public class Pipeline {
 
     public <T> void execute(Event<T> event) {
         for (Processor processor : processors) {
-            processor.execute(event);
+            processor.process(event);
         }
     }
 

@@ -106,6 +106,16 @@ public class JsonUtil {
     }
 
     /**
+     * 将JsonNode转换为对象
+     *
+     * @param raw JsonNode
+     * @return T 转换对象
+     */
+    public static <T> T convertValue(Object raw, Class<T> clazz) {
+        return OBJECT_MAPPER.convertValue(raw, clazz);
+    }
+
+    /**
      * 从JSON字符串中根据路径提取值
      *
      * @param json JSON字符串

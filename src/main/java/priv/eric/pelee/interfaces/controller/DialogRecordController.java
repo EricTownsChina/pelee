@@ -2,7 +2,6 @@ package priv.eric.pelee.interfaces.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import priv.eric.pelee.application.service.DataPipelineService;
 import priv.eric.pelee.interfaces.entity.Resp;
 
 import java.util.Map;
@@ -17,9 +16,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/dialog_record")
 public class DialogRecordController {
-
-    @Autowired
-    private DataPipelineService dataPipelineService;
 
     /**
      * 简单处理对话记录
@@ -42,8 +38,7 @@ public class DialogRecordController {
             @RequestParam String pipelineId,
             @RequestBody Object dialogRecord) {
         try {
-            String result = dataPipelineService.executePipeline(pipelineId, dialogRecord);
-            return Resp.ok(result);
+            return Resp.ok();
         } catch (IllegalArgumentException e) {
             return Resp.error(e.getMessage());
         } catch (Exception e) {
@@ -58,8 +53,7 @@ public class DialogRecordController {
     @GetMapping("/available-pipelines")
     public Resp<Map<String, Object>> getAvailablePipelines() {
         try {
-            Map<String, Object> pipelineInfo = dataPipelineService.getAvailablePipelinesInfo();
-            return Resp.ok(pipelineInfo);
+            return Resp.ok();
         } catch (Exception e) {
             return Resp.error("Failed to get available pipelines: " + e.getMessage());
         }

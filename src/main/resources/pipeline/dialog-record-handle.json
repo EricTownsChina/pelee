@@ -14,22 +14,26 @@
       "url": ""
     }
   ],
-  "filter": [
+  "processors": [
     {
       "name": "重命名基础字段",
       "type": "rename",
-      "mappings": {
-        "/user/id": "user_id",
-        "userId": "user_id",
-        "sessionId": "session_id"
+      "config": {
+        "mappings": {
+          "/user/id": "user_id",
+          "userId": "user_id",
+          "sessionId": "session_id"
+        }
       }
     },
     {
       "type": "remove",
-      "fields": [
-        "/param/event_list",
-        "ori_message"
-      ]
+      "config": {
+        "fields": [
+          "/param/event_list",
+          "ori_message"
+        ]
+      }
     }
   ]
 }

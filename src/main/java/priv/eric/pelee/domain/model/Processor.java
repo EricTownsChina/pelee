@@ -8,6 +8,6 @@ package priv.eric.pelee.domain.model;
  */
 public interface Processor<T> {
 
-    void execute(Event<T> event);
+    void process(Event<T> event);
 
 }
